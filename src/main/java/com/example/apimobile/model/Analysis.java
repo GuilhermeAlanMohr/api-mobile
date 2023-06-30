@@ -1,9 +1,14 @@
 package com.example.apimobile.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
 public class Analysis {
-    private int codAnalysis;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long codAnalysis;
     private String nomeAnalysis;
     private Date dataOrdenha;
     private String testeCaneca;
@@ -16,9 +21,14 @@ public class Analysis {
     private String odor;
     private String viscusidade;
     private String conservacao;
+    @ManyToOne
     private Farm farm;
 
-    public Analysis(int codAnalysis, String nomeAnalysis, Date dataOrdenha, String testeCaneca, String cmt, Double ccs,
+    public Analysis() {
+
+    }
+
+    public Analysis(Long codAnalysis, String nomeAnalysis, Date dataOrdenha, String testeCaneca, String cmt, Double ccs,
                     Double cbt, String residuosAntibioticos, String sabor, String cor, String odor, String viscusidade,
                     String conservacao, Farm farm) {
         this.codAnalysis = codAnalysis;
@@ -55,11 +65,11 @@ public class Analysis {
         this.farm = farm;
     }
 
-    public int getCodAnalysis() {
+    public Long getCodAnalysis() {
         return codAnalysis;
     }
 
-    public void setCodAnalysis(int codAnalysis) {
+    public void setCodAnalysis(Long codAnalysis) {
         this.codAnalysis = codAnalysis;
     }
 

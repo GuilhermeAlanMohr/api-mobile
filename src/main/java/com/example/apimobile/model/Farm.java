@@ -1,39 +1,51 @@
 package com.example.apimobile.model;
 
+import jakarta.persistence.*;
+
+import java.util.Set;
+
+@Entity
 public class Farm {
 
-    private int codFarm;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long codFarm;
     private String nomeFarm;
     private String nomeDonoFarm;
     private String cidade;
     private int quantidadeAnimais;
     private Double tamanho;
+    @Embedded
     private Localizacao localizacao;
 
-    public Farm(int codFarm, String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Localizacao localizacao) {
+    public Farm() {
+
+    }
+
+    public Farm(Long codFarm, String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Long latitude, Long longitude) {
         this.codFarm = codFarm;
         this.nomeFarm = nomeFarm;
         this.nomeDonoFarm = nomeDonoFarm;
         this.cidade = cidade;
         this.quantidadeAnimais = quantidadeAnimais;
         this.tamanho = tamanho;
-        this.localizacao = localizacao;
+        this.localizacao = new Localizacao(latitude, longitude);
     }
 
-    public Farm(String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Localizacao localizacao) {
+    public Farm(String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Long latitude, Long longitude ) {
         this.nomeFarm = nomeFarm;
         this.nomeDonoFarm = nomeDonoFarm;
         this.cidade = cidade;
         this.quantidadeAnimais = quantidadeAnimais;
         this.tamanho = tamanho;
-        this.localizacao = localizacao;
+        this.localizacao = new Localizacao(latitude, longitude);
     }
 
-    public int getCodFarm() {
+    public Long getCodFarm() {
         return codFarm;
     }
 
-    public void setCodFarm(int codFarm) {
+    public void setCodFarm(Long codFarm) {
         this.codFarm = codFarm;
     }
 
@@ -83,5 +95,38 @@ public class Farm {
 
     public void setLocalizacao(Localizacao localizacao) {
         this.localizacao = localizacao;
+    }
+
+    @Embeddable
+    public class Localizacao {
+
+        private Long latitude;
+        private Long longitude;
+
+        public Localizacao(Long latitude, Long longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        public Localizacao() {
+
+        }
+
+        public Long getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(Long latitude) {
+            this.latitude = latitude;
+        }
+
+        public Long getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(Long longitude) {
+            this.longitude = longitude;
+        }
+
     }
 }

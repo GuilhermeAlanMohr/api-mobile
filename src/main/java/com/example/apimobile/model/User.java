@@ -1,18 +1,24 @@
 package com.example.apimobile.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "usuario")
 public class User {
 
-    private int codUser;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long codUser;
     private String nomeUser;
     private String email;
     private String token;
     private String senha;
 
-    public int getCodUser() {
+    public Long getCodUser() {
         return codUser;
     }
 
-    public void setCodUser(int codUser) {
+    public void setCodUser(Long codUser) {
         this.codUser = codUser;
     }
 
@@ -48,8 +54,19 @@ public class User {
         this.senha = senha;
     }
 
-    public User(int codUser, String nomeUser, String email, String token, String senha) {
+    public User() {
+
+    }
+
+    public User(Long codUser, String nomeUser, String email, String token, String senha) {
         this.codUser = codUser;
+        this.nomeUser = nomeUser;
+        this.email = email;
+        this.token = token;
+        this.senha = senha;
+    }
+
+    public User(String nomeUser, String email, String token, String senha) {
         this.nomeUser = nomeUser;
         this.email = email;
         this.token = token;

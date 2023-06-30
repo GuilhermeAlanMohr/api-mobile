@@ -12,20 +12,20 @@ import java.util.List;
 @RequestMapping("usuario")
 public class UserController {
 
-    private ArrayList<User> listaUsers = new ArrayList<User>();
+    private ArrayList<User> listaUsers = new ArrayList<>();
 
     @GetMapping("/usuarios")
     public List<User> getUsuarios(){
-        listaUsers.add(new User(0,"admin","admin@admin"," ","1234"));
-        listaUsers.add(new User(1,"gui","gui@admin"," ","312ewfse"));
-        listaUsers.add(new User(2,"user","user@admin"," ","3feferfre"));
+        listaUsers.add(new User("admin","admin@admin"," ","1234"));
+        listaUsers.add(new User("gui","gui@admin"," ","312ewfse"));
+        listaUsers.add(new User("user","user@admin"," ","3feferfre"));
         return listaUsers;
     }
 
     @GetMapping("/usuario")
     public User getUsuario(){
         System.out.println("Chamou o método");
-        listaUsers.add(new User(0,"admin","admin@admin"," ","1234"));
+        listaUsers.add(new User("admin","admin@admin"," ","1234"));
         return listaUsers.get(0);
     }
 
