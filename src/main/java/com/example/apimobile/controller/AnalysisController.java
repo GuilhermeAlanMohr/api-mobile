@@ -5,10 +5,7 @@ import com.example.apimobile.model.Analysis;
 import com.example.apimobile.model.Farm;
 import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.Instant;
@@ -19,38 +16,40 @@ import java.util.List;
 @RequestMapping("analise")
 public class AnalysisController {
 
+    private AnalysisDAO analysisDAO;
+    private ArrayList<Analysis> listAnalysis = new ArrayList<>();
 
     @Autowired
     public AnalysisController(AnalysisDAO analysisDAO) {
         this.analysisDAO = analysisDAO;
     }
 
-    private AnalysisDAO analysisDAO;
-    private ArrayList<Analysis> listAnalysis = new ArrayList<>();
-
     @GetMapping("/analises")
     public List<Analysis> getAnalysis(){
-        listAnalysis.add(new Analysis("Análise Teste", Date.from(Instant.now()), "Normal", "Sem alterações", 200.0, 100.0, "Não apresenta", "Normal", "Sem alteração", "Em conformidade", "Não apresenta", "Adequada", new Farm(1l,"Dourados","Guilherme","Venâncio Aires/RS",20, 200.0, -52l, -36l)));
-        listAnalysis.add(new Analysis("Análise Experimental", Date.from(Instant.now()), "Normal", "Sem alterações", 200.0, 100.0, "Não apresenta", "Sem alteração", "Normal", "Em conformidade", "Não apresenta", "Adequada", new Farm(2l,"Pinhais","Paulo","Candelária/RS",20, 200.0, -52l, -36l)));
-        return listAnalysis;
+        System.out.println("Método de Listagem de todas as análises chamado");
+//        listAnalysis.add(new Analysis("Análise Teste", Date.from(Instant.now()), "Normal", "Sem alterações", 200.0, 100.0, "Não apresenta", "Normal", "Sem alteração", "Em conformidade", "Não apresenta", "Adequada", new Farm(1l,"Dourados","Guilherme","Venâncio Aires/RS",20, 200.0, -52l, -36l)));
+//        listAnalysis.add(new Analysis("Análise Experimental", Date.from(Instant.now()), "Normal", "Sem alterações", 200.0, 100.0, "Não apresenta", "Sem alteração", "Normal", "Em conformidade", "Não apresenta", "Adequada", new Farm(2l,"Pinhais","Paulo","Candelária/RS",20, 200.0, -52l, -36l)));
+//        return listAnalysis;
+        return this.analysisDAO.getAllAnalysis();
     }
 
     @GetMapping("/analise")
-    public Analysis getAnalise(){
-        System.out.println("Chamou o método GET uma fazenda");
-        return new Analysis("Análise Experimental", Date.from(Instant.now()), "Normal", "Sem alterações", 200.0, 100.0, "Não apresenta", "Sem alteração", "Normal", "Em conformidade", "Não apresenta", "Adequada", new Farm("Pinhais","Paulo","Candelária/RS",20, 200.0, -52l, -36l));
+    public Analysis getAnalise(@RequestBody Long codigo){
+        System.out.println("Método de busca de uma análise chamado");
+        Analysis analysis = this.analysisDAO.getAnalysis(codigo) != null ? this.analysisDAO.getAnalysis(codigo).get() : null;
+        return analysis;
     }
 
     @PostMapping("/cadastrar")
-    public void createAnalysis(Analysis analise){
-        System.out.println("Chamou o método");
-        listAnalysis.add(analise);
+    public Analysis createAnalysis(@RequestBody Analysis analise){
+        System.out.println("Chamou o método de Cadastro de Análise");
         Analysis analysisSalva = this.analysisDAO.insertAnalysis(analise);
         if (analysisSalva != null) {
             System.out.println("Análise salva com sucesso");
         } else {
             System.out.println("Erro ao salvar");
         }
+        return analysisSalva;
     }
 
 }

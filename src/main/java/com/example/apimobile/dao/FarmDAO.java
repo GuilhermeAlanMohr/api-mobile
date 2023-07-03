@@ -4,6 +4,9 @@ import com.example.apimobile.model.Farm;
 import com.example.apimobile.repository.FarmRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class FarmDAO {
 
@@ -17,4 +20,11 @@ public class FarmDAO {
         return this.farmRepository.save(farm);
     }
 
+    public List<Farm> getAllFarms() {
+        return this.farmRepository.findAll();
+    }
+
+    public Optional<Farm> getFarm(Long codigo){
+        return this.farmRepository.findById(codigo);
+    }
 }
