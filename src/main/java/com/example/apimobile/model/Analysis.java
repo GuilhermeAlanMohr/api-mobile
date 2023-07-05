@@ -3,6 +3,7 @@ package com.example.apimobile.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Analysis {
@@ -23,6 +24,8 @@ public class Analysis {
     private String conservacao;
     @ManyToOne
     private Farm farm;
+    @ElementCollection
+    private List<Byte> fotos;
 
     public Analysis() {
 
@@ -30,7 +33,7 @@ public class Analysis {
 
     public Analysis(Long codAnalysis, String nomeAnalysis, Date dataOrdenha, String testeCaneca, String cmt, Double ccs,
                     Double cbt, String residuosAntibioticos, String sabor, String cor, String odor, String viscusidade,
-                    String conservacao, Farm farm) {
+                    String conservacao, Farm farm, List<Byte> fotos) {
         this.codAnalysis = codAnalysis;
         this.nomeAnalysis = nomeAnalysis;
         this.dataOrdenha = dataOrdenha;
@@ -45,11 +48,12 @@ public class Analysis {
         this.viscusidade = viscusidade;
         this.conservacao = conservacao;
         this.farm = farm;
+        this.fotos = fotos;
     }
 
     public Analysis(String nomeAnalysis, Date dataOrdenha, String testeCaneca, String cmt, Double ccs,
                     Double cbt, String residuosAntibioticos, String sabor, String cor, String odor, String viscusidade,
-                    String conservacao, Farm farm) {
+                    String conservacao, Farm farm, List<Byte> fotos) {
         this.nomeAnalysis = nomeAnalysis;
         this.dataOrdenha = dataOrdenha;
         this.testeCaneca = testeCaneca;
@@ -175,6 +179,14 @@ public class Analysis {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    public List<Byte> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Byte> fotos) {
+        this.fotos = fotos;
     }
 
 }
