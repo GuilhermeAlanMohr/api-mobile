@@ -1,6 +1,6 @@
 package com.example.apimobile.dao;
 
-import com.example.apimobile.model.User;
+import com.example.apimobile.model.Usuario;
 import com.example.apimobile.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +16,23 @@ public class UserDAO {
         this.userRepository = userRepository;
     }
 
-    public User login(User user){
-        return this.userRepository.findUserByEmailAndSenha(user.getEmail(), user.getSenha());
+    public Usuario login(String email){
+        Usuario usuario = this.userRepository.findByEmailIgnoreCase(email).get();
+        if (usuario != null) {
+            return this.userRepository.findUserByEmailAndSenha(usuario.getEmail(), usuario.getSenha()).get();
+        }
+        return null;
     }
 
-    public Optional<User> getUser(Long codigo) {
+    public Optional<Usuario> getUser(Long codigo) {
         return this.userRepository.findById(codigo);
     }
 
-    public List<User> getAllUsers(){
+    public List<Usuario> getAllUsers(){
         return this.userRepository.findAll();
     }
 
-    public User insertUser(User user){
+    public Usuario insertUser(Usuario user){
         return this.userRepository.save(user);
     }
 

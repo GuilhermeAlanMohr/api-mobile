@@ -2,7 +2,6 @@ package com.example.apimobile.controller;
 
 import com.example.apimobile.dao.FarmDAO;
 import com.example.apimobile.model.Farm;
-import com.example.apimobile.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,8 @@
 package com.example.apimobile;
 
+import com.example.apimobile.dao.UserDAO;
+import com.example.apimobile.model.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,6 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("com.example.apimobile")
 @SpringBootApplication
 public class ApiMobileApplication {
+
+	@Autowired
+	private UserDAO userDAO;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiMobileApplication.class, args);

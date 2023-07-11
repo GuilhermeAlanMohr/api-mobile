@@ -1,10 +1,10 @@
 package com.example.apimobile.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario")
-public class User {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +13,8 @@ public class User {
     private String email;
     private String token;
     private String senha;
+
+    private String permissao;
 
     public Long getCodUser() {
         return codUser;
@@ -54,11 +56,19 @@ public class User {
         this.senha = senha;
     }
 
-    public User() {
+    public String getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(String permissao) {
+        this.permissao = permissao;
+    }
+
+    public Usuario() {
 
     }
 
-    public User(Long codUser, String nomeUser, String email, String token, String senha) {
+    public Usuario(Long codUser, String nomeUser, String email, String token, String senha) {
         this.codUser = codUser;
         this.nomeUser = nomeUser;
         this.email = email;
@@ -66,14 +76,31 @@ public class User {
         this.senha = senha;
     }
 
-    public User(String nomeUser, String email, String token, String senha) {
+    public Usuario(Long codUser, String nomeUser, String email, String token, String senha, String permissao) {
+        this.codUser = codUser;
+        this.nomeUser = nomeUser;
+        this.email = email;
+        this.token = token;
+        this.senha = senha;
+        this.permissao = permissao;
+    }
+
+    public Usuario(String nomeUser, String email, String token, String senha) {
         this.nomeUser = nomeUser;
         this.email = email;
         this.token = token;
         this.senha = senha;
     }
 
-    public User(String email, String senha) {
+    public Usuario(String nomeUser, String email, String token, String senha, String permissao) {
+        this.nomeUser = nomeUser;
+        this.email = email;
+        this.token = token;
+        this.senha = senha;
+        this.permissao = permissao;
+    }
+
+    public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }

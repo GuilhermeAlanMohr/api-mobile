@@ -1,8 +1,7 @@
 package com.example.apimobile.model;
 
-import jakarta.persistence.*;
 
-import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 public class Farm {

@@ -1,7 +1,6 @@
 package com.example.apimobile.model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 

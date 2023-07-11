@@ -1,15 +1,17 @@
 package com.example.apimobile.repository;
 
-import com.example.apimobile.model.User;
+import com.example.apimobile.model.Usuario;
+import com.sun.istack.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<Usuario, Long>{
 
-    User findUserByEmailAndSenha(String email, String senha);
+    Optional<Usuario> findUserByEmailAndSenha(String email, String senha);
+
+    Optional<Usuario> findByEmailIgnoreCase(@NotNull String email);
 
 }

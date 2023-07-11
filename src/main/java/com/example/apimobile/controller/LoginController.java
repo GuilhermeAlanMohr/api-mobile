@@ -1,28 +1,57 @@
 package com.example.apimobile.controller;
 
 import com.example.apimobile.dao.UserDAO;
-import com.example.apimobile.model.User;
+import com.example.apimobile.model.Usuario;
+import com.example.apimobile.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("login")
 public class LoginController {
 
-    private UserDAO userDAO;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    public LoginController(UserDAO userDAO){
-        this.userDAO = userDAO;
-    }
+    private UserDAO userDAO;
 
-    @PostMapping("/")
-    public User login(@RequestBody String email, @RequestBody String senha){
-        System.out.println("Chamou o método login");
-//        return new User(0l,"admin","admin@admin"," ","1234");
-        return this.userDAO.login(new User(email, senha));
+    @CrossOrigin(origins = "*")
+    @PostMapping("/login")
+    public ResponseEntity<Object> autenticacao(@RequestBody Usuario usuario){
+
+        System.out.println("login: "+usuario.getEmail());
+        System.out.println("senha: "+usuario.getSenha());
+        try{
+            final Authentication authentication = this.authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha()));
+
+            if(authentication.isAuthenticated()){
+                //colocamos nossa instancia autenticada no contexto do spring security
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                Usuario user = userDAO.login(usuario.getEmail());
+
+                System.out.println("Gerando token de autorizacao ****");
+                String token = new JWTUtil().geraToken(usuario);
+
+                user.setToken(token);
+                user.setSenha("");
+
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Usuário ou senha incorretos!", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>("Usuário ou senha incorretos!", HttpStatus.BAD_REQUEST);
     }
 
 }
