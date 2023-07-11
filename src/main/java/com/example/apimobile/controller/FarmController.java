@@ -20,6 +20,7 @@ public class FarmController {
         this.farmDao = farmDao;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/fazendas")
     public List<Farm> getFarms(){
         System.out.println("Chamou o método de Listagem das Fazendas cadastradas");
@@ -29,6 +30,7 @@ public class FarmController {
         return this.farmDao.getAllFarms();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/fazenda")
     public Farm getFarm(@RequestBody Long codigo){
         System.out.println("Chamou o método que Busca uma Fazenda cadastrada");
@@ -37,6 +39,7 @@ public class FarmController {
         return farm;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/cadastrar")
     public Farm createFarm(@RequestBody Farm fazenda){
         System.out.println("Chamou o método de Cadastro de uma Fazenda");

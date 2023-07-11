@@ -24,6 +24,7 @@ public class AnalysisController {
         this.analysisDAO = analysisDAO;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/analises")
     public List<Analysis> getAnalysis(){
         System.out.println("Método de Listagem de todas as análises chamado");
@@ -33,6 +34,7 @@ public class AnalysisController {
         return this.analysisDAO.getAllAnalysis();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/analise")
     public Analysis getAnalise(@RequestBody Long codigo){
         System.out.println("Método de busca de uma análise chamado");
@@ -40,6 +42,7 @@ public class AnalysisController {
         return analysis;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/cadastrar")
     public Analysis createAnalysis(@RequestBody Analysis analise){
         System.out.println("Chamou o método de Cadastro de Análise");

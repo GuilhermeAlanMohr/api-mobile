@@ -19,9 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 public class ApiMobileApplication {
 
-	@Autowired
-	private UserDAO userDAO;
-
 	public static void main(String[] args) {
 		SpringApplication.run(ApiMobileApplication.class, args);
 	}

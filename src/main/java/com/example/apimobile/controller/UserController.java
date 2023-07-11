@@ -20,6 +20,7 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/usuarios")
     public List<Usuario> getUsuarios(){
         System.out.println("Chamou o método de listagem de usuários");
@@ -30,6 +31,7 @@ public class UserController {
         return this.userDAO.getAllUsers();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/usuario")
     public Usuario getUsuario(@RequestBody Long codigo){
         System.out.println("Chamou o método que busca um Usuário");
@@ -39,6 +41,7 @@ public class UserController {
         return user;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/cadastrar")
     public Usuario insertUsuario(@RequestBody Usuario user){
         System.out.println("Chamou o método de Cadastrar Usuário");
