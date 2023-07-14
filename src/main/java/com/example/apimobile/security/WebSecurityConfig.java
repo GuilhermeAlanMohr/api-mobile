@@ -49,13 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/teste").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/analise/analises").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/analise/analise").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/analise/analise").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/analise/cadastrar").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET,"/fazenda/fazendas").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/fazenda/fazenda").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/fazenda/fazenda").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/fazenda/cadastrar").hasAuthority("ADMIN");
 
             http.addFilterBefore(this.filtroAutenticacao(), UsernamePasswordAuthenticationFilter.class);

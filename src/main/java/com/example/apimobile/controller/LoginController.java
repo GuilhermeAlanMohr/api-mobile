@@ -41,7 +41,7 @@ public class LoginController {
                 String token = new JWTUtil().geraToken(usuario);
 
                 user.setToken(token);
-                user.setSenha("");
+                user.setSenha("semsenha");
 
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }

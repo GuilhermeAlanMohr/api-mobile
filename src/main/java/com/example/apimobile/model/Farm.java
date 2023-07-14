@@ -14,30 +14,32 @@ public class Farm {
     private String cidade;
     private int quantidadeAnimais;
     private Double tamanho;
-    @Embedded
-    private Localizacao localizacao;
+    private Double latitude;
+    private Double longitude;
 
     public Farm() {
 
     }
 
-    public Farm(Long codFarm, String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Long latitude, Long longitude) {
+    public Farm(Long codFarm, String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Double latitude, Double longitude) {
         this.codFarm = codFarm;
         this.nomeFarm = nomeFarm;
         this.nomeDonoFarm = nomeDonoFarm;
         this.cidade = cidade;
         this.quantidadeAnimais = quantidadeAnimais;
         this.tamanho = tamanho;
-        this.localizacao = new Localizacao(latitude, longitude);
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public Farm(String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Long latitude, Long longitude ) {
+    public Farm(String nomeFarm, String nomeDonoFarm, String cidade, int quantidadeAnimais, Double tamanho, Double latitude, Double longitude ) {
         this.nomeFarm = nomeFarm;
         this.nomeDonoFarm = nomeDonoFarm;
         this.cidade = cidade;
         this.quantidadeAnimais = quantidadeAnimais;
         this.tamanho = tamanho;
-        this.localizacao = new Localizacao(latitude, longitude);
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Long getCodFarm() {
@@ -87,45 +89,20 @@ public class Farm {
     public void setTamanho(Double tamanho) {
         this.tamanho = tamanho;
     }
-
-    public Localizacao getLocalizacao() {
-        return localizacao;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLocalizacao(Localizacao localizacao) {
-        this.localizacao = localizacao;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    @Embeddable
-    public class Localizacao {
-
-        private Long latitude;
-        private Long longitude;
-
-        public Localizacao(Long latitude, Long longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
-        public Localizacao() {
-
-        }
-
-        public Long getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(Long latitude) {
-            this.latitude = latitude;
-        }
-
-        public Long getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(Long longitude) {
-            this.longitude = longitude;
-        }
-
+    public Double getLongitude() {
+        return longitude;
     }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
 }
